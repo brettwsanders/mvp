@@ -8,15 +8,12 @@ var currentFrame = {
   clickDrag: []
 };
 
-// var clickX = [];
-// var clickY = [];
-// var clickDrag = [];
-
 //information for prior frame
-// var previousFrame = {};
-// var prevClickX = [];
-// var prevClickY = [];
-// var prevClickDrag = [];
+var previousFrame = {
+  clickX: [],
+  clickY: [],
+  clickDrag: []
+};
 
 var paint;
 var framesSaved = 0;
@@ -29,9 +26,10 @@ var addClick = function (x, y, dragging) {
   currentFrame.clickDrag.push(dragging);
 };
 
-var redraw = function (frame) {
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+var redraw = function (frame, style) {
+  // context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
+  context.strokeStyle = style || '#000000';
   context.lineJoin = "round";
   context.lineWidth = 7;
       
@@ -47,27 +45,6 @@ var redraw = function (frame) {
      context.stroke();
   }
 };
-
-// var drawPrevFrame = function () {
-//   context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
-
-//   context.strokeStyle = '#FF0000';
-//   context.lineJoin = "round";
-//   context.lineWidth = 7;
-      
-//   for(var i=0; i < clickX.length; i++) {    
-//     context.beginPath();
-//     if(clickDrag[i] && i){
-//       context.moveTo(clickX[i-1], clickY[i-1]);
-//      }else{
-//        context.moveTo(clickX[i]-1, clickY[i]);
-//      }
-//      context.lineTo(clickX[i], clickY[i]);
-//      context.closePath();
-//      context.stroke();
-//   }
-// };
-
 
 var clearCurrentFrame = function() {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
@@ -88,9 +65,9 @@ var play = function() {
 };
 
 var setPreviousFrame = function() {
-  var prevClickX = currentFrame.clickX.slice();
-  var prevClickY = currentFrame.clickY.slice();
-  var prevClickDrag = currentFrame.clickDrag.slice();
+  previousFrame.clickX = currentFrame.clickX.slice();
+  previousFrame.clickY = currentFrame.clickY.slice();
+  previousFrame.clickDrag = currentFrame.clickDrag.slice();
 };
 
 $('#frameView').mousedown(function(e){
@@ -118,6 +95,8 @@ $('#frameView').mouseleave(function(e){
 });
 
 $('#saveFrame').on('click', function() {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  redraw(currentFrame);
   var image = new Image();
   image.src = canvas.toDataURL("image/png");
   framesSaved++;
@@ -126,6 +105,7 @@ $('#saveFrame').on('click', function() {
   $('#count-saved-frames').text(framesSaved);
   setPreviousFrame();
   clearCurrentFrame();
+  redraw(previousFrame, '#FF0000');
 });
 
 $('#playButton').on('click', function() {
