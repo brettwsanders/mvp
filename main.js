@@ -5,7 +5,7 @@ var clickX = [];
 var clickY = [];
 var clickDrag = [];
 var paint;
-var frameCount = 0;
+var framesSaved = 0;
 var currentFrame = 1;
 var playInterval;
 
@@ -50,7 +50,7 @@ var play = function() {
   };
   image.src = localStorage.getItem('frame' + currentFrame);
   currentFrame++;
-  if (currentFrame > frameCount) currentFrame = 1;
+  if (currentFrame > framesSaved) currentFrame = 1;
 };
 
 $('#frameView').mousedown(function(e){
@@ -78,17 +78,21 @@ $('#frameView').mouseleave(function(e){
 });
 
 $('#saveFrame').on('click', function() {
-  frameCount++;
   var image = new Image();
   image.src = canvas.toDataURL("image/png");
-  localStorage.setItem("frame" + frameCount, image.src);
-  document.body.appendChild(image);
-  $('#frameCount').text(frameCount);
+  framesSaved++;
+  localStorage.setItem("frame" + framesSaved, image.src);
+  $('#view-saved-frames').append('<img src=' + image.src + '>');
+  $('#count-saved-frames').text(framesSaved);
   clearFrame();
 });
 
 
 $('#playButton').on('click', function() {
+  if (framesSaved <= 0) {
+    alert('You haven\'t saved any frames!');
+    return;
+  }
   playInterval = window.setInterval(play, 500);
 });
 
@@ -96,8 +100,9 @@ $('#stopButton').on('click', function() {
   clearInterval(playInterval);
   clearFrame();
   currentFrame = 1;
-  frameCount = 0;
-  $('#frameCount').text(frameCount);
+  framesSaved = 0;
+  $('#count-saved-frames').text(framesSaved);
+  $('#view-saved-frames').empty();
 });
 
 
