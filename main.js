@@ -1,8 +1,9 @@
-var context = document.getElementById('frameView').getContext("2d");
+var canvas = document.getElementById('frameView');
+var context = canvas.getContext("2d");
 
-var clickX = new Array();
-var clickY = new Array();
-var clickDrag = new Array();
+var clickX = [];
+var clickY = [];
+var clickDrag = [];
 var paint;
 
 var addClick = function (x, y, dragging) {
@@ -30,6 +31,13 @@ var redraw = function () {
   }
 };
 
+var saveToImage = function () {
+  var image = new Image();
+  image.src = canvas.toDataURL("image/png");
+  document.body.appendChild(image);
+  return image;
+}
+
 $('#frameView').mousedown(function(e){
   var mouseX = e.pageX - this.offsetLeft;
   var mouseY = e.pageY - this.offsetTop;
@@ -53,3 +61,8 @@ $('#frameView').mouseup(function(e){
 $('#frameView').mouseleave(function(e){
   paint = false;
 });
+
+$('#saveFrame').on('click', function() {
+  saveToImage();
+});
+
