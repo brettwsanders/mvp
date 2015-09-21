@@ -1,0 +1,7 @@
+#container { 
+  position: relative;
+}
+
+#frameView {
+  border: 1px solid #000;
+}
