@@ -5,6 +5,9 @@ var clickX = [];
 var clickY = [];
 var clickDrag = [];
 var paint;
+var frameCount = 0;
+var currentFrame = 1;
+var playInterval;
 
 var addClick = function (x, y, dragging) {
   clickX.push(x);
@@ -31,12 +34,24 @@ var redraw = function () {
   }
 };
 
-var saveToImage = function () {
+
+var clearFrame = function() {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  clickX = [];
+  clickY = [];
+  clickDrag = [];
+};
+
+var play = function() {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
   var image = new Image();
-  image.src = canvas.toDataURL("image/png");
-  document.body.appendChild(image);
-  return image;
-}
+  image.onload = function() {
+    context.drawImage(image, 0, 0);
+  };
+  image.src = localStorage.getItem('frame' + currentFrame);
+  currentFrame++;
+  if (currentFrame > frameCount) currentFrame = 1;
+};
 
 $('#frameView').mousedown(function(e){
   var mouseX = e.pageX - this.offsetLeft;
@@ -63,6 +78,26 @@ $('#frameView').mouseleave(function(e){
 });
 
 $('#saveFrame').on('click', function() {
-  saveToImage();
+  frameCount++;
+  var image = new Image();
+  image.src = canvas.toDataURL("image/png");
+  localStorage.setItem("frame" + frameCount, image.src);
+  document.body.appendChild(image);
+  $('#frameCount').text(frameCount);
+  clearFrame();
 });
+
+
+$('#playButton').on('click', function() {
+  playInterval = window.setInterval(play, 500);
+});
+
+$('#stopButton').on('click', function() {
+  clearInterval(playInterval);
+  clearFrame();
+  currentFrame = 1;
+  frameCount = 0;
+  $('#frameCount').text(frameCount);
+});
+
 

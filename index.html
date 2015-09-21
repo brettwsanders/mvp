@@ -8,10 +8,15 @@
 <body>
   <div id="container">
     <h1>Flipbook</h1>
-    <button id="saveFrame">Save Frame</button>
+    <div id="buttons-container">
+      <button id="saveFrame">Save Frame</button>
+      <button id="playButton">Play!</button>
+      <button id="stopButton">Stop!</button>
+    </div>
     <canvas id="frameView" width="400" height="400">
       <p>You're browser doesn't support this web application :(</p>
     </canvas>
+      <h2><span>Frames Saved: </span><span id="frameCount">0</span></h2>
   </div>
   <script src='bower_components/jquery/dist/jquery.js'></script>
   <script src='main.js'></script>
