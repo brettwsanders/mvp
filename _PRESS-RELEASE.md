@@ -18,27 +18,36 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Flipbook
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  The market is anyone who likes to make quick and easy animations.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  The application is a simple animation maker. There will be a blank screen with drawing tools. The user can draw something onto the screen and save the frame. Then the next frame (another blank screen) will appear. The user will draw the next frame of the animation. The user can continue to draw as many frames as they like. When they are done they can watch all the frames in a loop to see the animation.
 
 ## Problem ##
   > Describe the problem your product solves.
+  The products solves the problem of making extremely quick and easy animations.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  The flipbook application solves the problem by being simple and easy to use and understand.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  My kids LOVE using this app!
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Just navigate to the flipbook site and start drawing!
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  This is so easy and fun I just love it!
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  Try it for yourself at <insert url here> thanks!
