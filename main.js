@@ -43,6 +43,7 @@ var clearFrame = function() {
 };
 
 var play = function() {
+  console.log(speed);
   context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
   var image = new Image();
   image.onload = function() {
@@ -93,7 +94,8 @@ $('#playButton').on('click', function() {
     alert('You haven\'t saved any frames!');
     return;
   }
-  playInterval = window.setInterval(play, 500);
+  var speed = $('#speed').val();
+  playInterval = window.setInterval(play, speed);
 });
 
 $('#stopButton').on('click', function() {
