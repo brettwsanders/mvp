@@ -5,3 +5,7 @@
 #frameView {
   border: 1px solid #000;
 }
+
+button {
+  display: block;
+}
