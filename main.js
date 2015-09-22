@@ -26,10 +26,10 @@ var addClick = function (x, y, dragging) {
   currentFrame.clickX.push(x);
   currentFrame.clickY.push(y);
   currentFrame.clickDrag.push(dragging);
-  console.log('Current Frame is: ');
-  console.log(' clickX: ', currentFrame.clickX);
-  console.log(' clickY: ', currentFrame.clickY);
-  console.log(' clickDrag: ', currentFrame.clickDrag);
+  // console.log('Current Frame is: ');
+  // console.log(' clickX: ', currentFrame.clickX);
+  // console.log(' clickY: ', currentFrame.clickY);
+  // console.log(' clickDrag: ', currentFrame.clickDrag);
 };
 
 var redraw = function (frame, style) {
@@ -162,7 +162,6 @@ $('#clearFrame').on('click', function() {
 });
 
 $('#see-all-frames').on('click', function() {
-  console.log('allFrames length ', allFrames.length);
   if (framesSaved <= 0) {
     alert('You haven\'t saved any frames!');
     return;
@@ -171,9 +170,7 @@ $('#see-all-frames').on('click', function() {
   var gbColor;
   var length = allFrames.length;
   for (var i = 0; i < allFrames.length; i++) {
-    console.log('length is ', length);
     gbColor = (gbMultiplier * (1 - i / length) ) + 100;
-    console.log('gbColor is ', gbColor);
     redraw(allFrames[i], rgbToHex(255, gbColor, gbColor));
   }
 });

@@ -33,4 +33,10 @@
   float:right;
 }
 
+#view-saved-frames {
+  width: 400px;
+}
 
+#view-saved-frames img {
+  border: 1px solid black;
+}
