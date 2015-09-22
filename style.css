@@ -8,13 +8,19 @@
 
 #top-buttons-container {
   display: block;
+  width: 400px;
 }
 
 #bottom-buttons-container {
   display: block;
+  width: 400px;
 }
 
-h4 {
-  display: inline;
+#frames-saved-div {
+  float: right;
+}
+
+#resetButton {
+  float:right;
 }
 
