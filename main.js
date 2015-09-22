@@ -15,6 +15,8 @@ var previousFrame = {
   clickDrag: []
 };
 
+var allFrames = [];
+
 var paint;
 var framesSaved = 0;
 var currentFrameID = 1;
@@ -28,7 +30,6 @@ var addClick = function (x, y, dragging) {
 
 var redraw = function (frame, style) {
   // context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
-
   context.strokeStyle = style || '#000000';
   context.lineJoin = "round";
   context.lineWidth = 7;
@@ -70,6 +71,14 @@ var setPreviousFrame = function() {
   previousFrame.clickDrag = currentFrame.clickDrag.slice();
 };
 
+var saveToAllFrames = function() {
+  allFrames.push({
+    clickX: currentFrame.clickX.slice(),
+    clickY: currentFrame.clickY.slice(),
+    clickDrag: currentFrame.clickDrag.slice()
+  });
+};
+
 $('#frameView').mousedown(function(e){
 
   var mouseX = e.pageX - this.offsetLeft;
@@ -77,13 +86,13 @@ $('#frameView').mousedown(function(e){
   var mouseY = e.pageY;
   paint = true;
   // addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-  addClick(e.pageX - this.offsetLeft - 8, e.pageY - this.offsetTop - 25);
+  addClick(e.pageX - this.offsetLeft - 9, e.pageY - this.offsetTop - 12);
   redraw(currentFrame);
 });
 
 $('#frameView').mousemove(function(e){
   if(paint){
-    addClick(e.pageX - this.offsetLeft - 8, e.pageY - this.offsetTop - 25, true);
+    addClick(e.pageX - this.offsetLeft - 9, e.pageY - this.offsetTop - 12, true);
     redraw(currentFrame);
   }
 });
@@ -106,6 +115,7 @@ $('#saveFrame').on('click', function() {
   $('#view-saved-frames').append('<img src=' + image.src + '>');
   $('#count-saved-frames').text(framesSaved);
   setPreviousFrame();
+  saveToAllFrames();
   clearCurrentFrame();
   redraw(previousFrame, '#FF9999');
 });
@@ -138,4 +148,14 @@ $('#clearFrame').on('click', function() {
   redraw(previousFrame, '#FF9999');
 });
 
-
+$('#see-all-frames').on('click', function() {
+  console.log('allFrames length ', allFrames.length);
+  if (framesSaved <= 0) {
+    alert('You haven\'t saved any frames!');
+    return;
+  }
+  for (var i = 0; i < allFrames.length; i++) {
+    debugger;
+    redraw(allFrames[i], '#FF9999');
+  }
+});
