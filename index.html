@@ -8,18 +8,20 @@
 <body>
   <div id="container">
     <h1>Flipbook</h1>
-    <div id="buttons-container">
+    <div id="top-buttons-container">
       <button id="saveFrame">Save Frame</button>
       <button id="clearFrame">Clear Frame</button>
+      <h4><span>Frames Saved: </span><span id="count-saved-frames">0</span></h4>
+    </div>
+    <canvas id="frameView" width="400" height="400">
+      <p>You're browser doesn't support this web application :(</p>
+    </canvas>
+    <div id="bottom-buttons-container">
       <button id="playButton">Play!</button>
       <button id="pauseButton">Pause</button>
       <button id="resetButton">Reset</button>
       <input name="speed" type="text" id="speed" value="100">
     </div>
-    <canvas id="frameView" width="400" height="400">
-      <p>You're browser doesn't support this web application :(</p>
-    </canvas>
-      <h3><span>Frames Saved: </span><span id="count-saved-frames">0</span></h3>
   </div>
   <div id="view-saved-frames">
   </div>
