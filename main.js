@@ -71,17 +71,22 @@ var setPreviousFrame = function() {
 };
 
 $('#frameView').mousedown(function(e){
+
   var mouseX = e.pageX - this.offsetLeft;
-  var mouseY = e.pageY - this.offsetTop;
+  // var mouseY = e.pageY - this.offsetTop;
+  var mouseY = e.pageY;
+  console.log('offsets are (', this.offsetLeft, ', ',this.offsetTop, ')');
+  console.log('coordinates are (', e.pageX,',', e.pageY, ')');
 
   paint = true;
-  addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  // addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  addClick(e.pageX - this.offsetLeft - 8, e.pageY - this.offsetTop - 25);
   redraw(currentFrame);
 });
 
 $('#frameView').mousemove(function(e){
   if(paint){
-    addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+    addClick(e.pageX - this.offsetLeft - 8, e.pageY - this.offsetTop - 25, true);
     redraw(currentFrame);
   }
 });
