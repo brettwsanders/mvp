@@ -105,7 +105,7 @@ $('#saveFrame').on('click', function() {
   $('#count-saved-frames').text(framesSaved);
   setPreviousFrame();
   clearCurrentFrame();
-  redraw(previousFrame, '#FF0000');
+  redraw(previousFrame, '#FF9999');
 });
 
 $('#playButton').on('click', function() {
@@ -117,7 +117,7 @@ $('#playButton').on('click', function() {
   playInterval = window.setInterval(play, speed);
 });
 
-$('#stopButton').on('click', function() {
+$('#resetButton').on('click', function() {
   clearInterval(playInterval);
   clearCurrentFrame();
   currentFrameID = 1;
@@ -127,3 +127,6 @@ $('#stopButton').on('click', function() {
 });
 
 
+$('#pauseButton').on('click', function() {
+  clearInterval(playInterval);
+});
