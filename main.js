@@ -26,6 +26,10 @@ var addClick = function (x, y, dragging) {
   currentFrame.clickX.push(x);
   currentFrame.clickY.push(y);
   currentFrame.clickDrag.push(dragging);
+  console.log('Current Frame is: ');
+  console.log(' clickX: ', currentFrame.clickX);
+  console.log(' clickY: ', currentFrame.clickY);
+  console.log(' clickDrag: ', currentFrame.clickDrag);
 };
 
 var redraw = function (frame, style) {
@@ -34,7 +38,7 @@ var redraw = function (frame, style) {
   context.lineJoin = "round";
   context.lineWidth = 7;
       
-  for(var i=0; i < frame.clickX.length; i++) {    
+  for(var i=0; i < frame.clickX.length; i++) {  
     context.beginPath();
     if(frame.clickDrag[i] && i){
       context.moveTo(frame.clickX[i-1], frame.clickY[i-1]);
@@ -77,6 +81,15 @@ var saveToAllFrames = function() {
     clickY: currentFrame.clickY.slice(),
     clickDrag: currentFrame.clickDrag.slice()
   });
+};
+
+var componentToHex = function(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+};
+
+var rgbToHex = function(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 };
 
 $('#frameView').mousedown(function(e){
@@ -154,8 +167,14 @@ $('#see-all-frames').on('click', function() {
     alert('You haven\'t saved any frames!');
     return;
   }
+  var gbMultiplier = 120;
+  var gbColor;
+  var length = allFrames.length;
   for (var i = 0; i < allFrames.length; i++) {
-    debugger;
-    redraw(allFrames[i], '#FF9999');
+    console.log('length is ', length);
+    gbColor = (gbMultiplier * (1 - i / length) ) + 100;
+    console.log('gbColor is ', gbColor);
+    redraw(allFrames[i], rgbToHex(255, gbColor, gbColor));
   }
 });
+
